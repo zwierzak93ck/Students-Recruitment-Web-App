@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-content>
+    <mat-horizontal-stepper [linear]=true #stepper="matHorizontalStepper">
+      <mat-step [stepControl]="!isPersonalDataValid">
+        <app-personal-data (personalDataValid)="checkPersonalDataValidation($event)" 
+          [personalDataBodyConfirmed]="isPersonalDataBodyConfirmed"></app-personal-data>
+        <div>
+          <button mat-raised-button color="primary" routerLink="/candidateHome">Anuluj wprowadzanie danych</button> 
+          <button mat-raised-button color="primary" [disabled]="!isPersonalDataValid" matStepperNext (click)="confirmPersonalDataBody()">Następny Krok</button>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <app-registered-address (registeredAddressValid)="checkRegisteredAddressValidation($event)" 
+          [registeredAddressBodyConfirmed]="isRegisteredAddressBodyConfirmed"></app-registered-address>
+        <div>
+          <button mat-raised-button matStepperPrevious color="primary">Poprzedni Krok</button>
+          <button mat-raised-button color="primary" [disabled]="!isRegisteredAddressValid" matStepperNext (click)="confirmRegisteredAddressBody()">Następny Krok</button>
+        </div>
+      </mat-step>
+      <mat-step (selectionChanged)="setTableData()">
+        <div class="row">
+         <div class="col-lg-6">
+            <table mat-table [dataSource]="personalDataSource">
+                <ng-container matColumnDef="data">
+                    <td mat-cell *matCellDef="let element" style="font-weight: bold">{{element.data}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="value">
+                      <td mat-cell *matCellDef="let element">{{element.value}}</td>
+                    </ng-container>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div class="col-lg-6">
+            <table mat-table [dataSource]="addressDataSource">
+                <ng-container matColumnDef="data">
+                    <td mat-cell *matCellDef="let element" style="font-weight: bold">{{element.data}}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="value">
+                      <td mat-cell *matCellDef="let element">{{element.value}}</td>
+                    </ng-container>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            </div>
+          
+        </div>
+        <button mat-raised-button color="primary" matStepperPrevious>Poprzedni krok</button>
+          <button mat-raised-button color="primary" (click)="addCandidate()"> Zatwierdź Formularz
+          </button>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+
+  </mat-card-content>
+</mat-card>

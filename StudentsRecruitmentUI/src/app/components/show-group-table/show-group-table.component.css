@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+  }
+
+  th {
+    font-weight: bolder;
+    font-size: medium;
+  }
+
+  th.mat-header-cell {
+    text-align: center;
+  }
+
+  span.table-title {
+    font-weight: bolder;
+    font-size: larger;
+  }
+
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background-color: #f5f5f5;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background-color:#efefef;
+  }
+
+  tr.example-detail-row {
+    height: 0;
+  }
+
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
+
+  div.nested-header {
+    font-weight: bolder;
+    font-size: medium;
+  }
+ 

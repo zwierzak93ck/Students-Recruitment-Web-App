@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <mat-select [value]="form" placeholder="Forma studiów" [(ngModel)]="form" [formControl]="formControl" required>
+        <mat-option value="S" (click)="checkValidation()">Stacjonarne</mat-option>
+        <mat-option value="N" (click)="checkValidation()">Niestacjonarne</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-lg-12">
+        <mat-select [disabled]="!form" [value]="degree" placeholder="Stopień studiów" [(ngModel)]="degree" [formControl]="degreeControl" required>
+          <mat-option value="1" (click)="checkValidation()">Pierwszy</mat-option>
+          <mat-option value="2" (click)="checkValidation()">Drugi</mat-option>
+        </mat-select>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <mat-select [disabled]="!degree" [value]="faculty" placeholder="Wydział" [(ngModel)]="faculty" [formControl]="facultyControl" required>
+        <mat-option value="A" (click)="checkValidation()">Wydział Budownictwa i Architektury</mat-option>
+        <mat-option value="B" (click)="checkValidation()">Wydział Mechatroniki i Budowy Maszyn</mat-option>
+        <mat-option value="C" (click)="checkValidation()">Wydział Zarządzania i Modelowania Komputerowego</mat-option>
+        <mat-option value="D" (click)="checkValidation()">Wydział Elektrotechniki, Automatyki i Informatyki</mat-option>
+        <mat-option value="E" (click)="checkValidation()">Wydział Inżynierii Środowiska, Geomatyki i Energetyki</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <mat-select [disabled]="!faculty" [value]="field" placeholder="Kierunek" [(ngModel)]="field" [formControl]="fieldControl" required>
+        <mat-option value="A" *ngIf="faculty === 'A'" (click)="checkValidation()">Architektura</mat-option>
+        <mat-option value="B" *ngIf="faculty === 'A'" (click)="checkValidation()">Budownictwo</mat-option>
+
+        <mat-option value="M" *ngIf="faculty === 'B'" (click)="checkValidation()">Mechanika i Budowa Maszyn</mat-option>
+        <mat-option value="T" *ngIf="faculty === 'B'" (click)="checkValidation()">Transport</mat-option>
+
+        <mat-option value="E" *ngIf="faculty === 'C'" (click)="checkValidation()">Ekonomia</mat-option>
+        <mat-option value="Z" *ngIf="faculty === 'C'" (click)="checkValidation()">Zarządzanie i Inżynieria Produkcji</mat-option>
+
+        <mat-option value="E" *ngIf="faculty === 'D'" (click)="checkValidation()">Elektrotechnika</mat-option>
+        <mat-option value="I" *ngIf="faculty === 'D'" (click)="checkValidation()">Informatyka</mat-option>
+
+        <mat-option value="G" *ngIf="faculty === 'E'" (click)="checkValidation()">Geodezja i Kartografia</mat-option>
+        <mat-option value="I" *ngIf="faculty === 'E'" (click)="checkValidation()">Inżynieria Środowiska</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="degree == 2">
+    <div class="col-lg-12">
+      <mat-select [disabled]="!field" [value]="specialization" placeholder="Specjalizacja" [(ngModel)]="specialization" [formControl]="specializationControl" required>
+        <mat-option value="BRAK" *ngIf="field === 'A' && faculty === 'A'" (click)="checkValidation()">Brak Specjalizacji</mat-option>
+        <mat-option value="K" *ngIf="field === 'B' && faculty === 'A'" (click)="checkValidation()">Konstrukcje Budowlane</mat-option>
+        <mat-option value="M" *ngIf="field === 'B' && faculty === 'A'" (click)="checkValidation()">Mosty</mat-option>
+        <mat-option value="E" *ngIf="field === 'M' && faculty === 'B'" (click)="checkValidation()">Eksploatacja Maszyn i Urządzeń Przemysłowych</mat-option>
+        <mat-option value="S" *ngIf="field === 'M' && faculty === 'B'" (click)="checkValidation()">Samochody i Ciągniki</mat-option>
+        <mat-option value="L" *ngIf="field === 'T' && faculty === 'B'" (click)="checkValidation()">Logika i Spedycja</mat-option>
+        <mat-option value="T" *ngIf="field === 'T' && faculty === 'B'" (click)="checkValidation()">Transport Samochodowy</mat-option>
+        <mat-option value="E" *ngIf="field === 'E' && faculty === 'C'" (click)="checkValidation()">Ekonomia Menadżerska</mat-option>
+        <mat-option value="F" *ngIf="field === 'E' && faculty === 'C'" (click)="checkValidation()">Finanse Przedsiębiorstw</mat-option>
+        <mat-option value="I" *ngIf="field === 'Z' && faculty === 'C'" (click)="checkValidation()">Inżynieria Zarządzania</mat-option>
+        <mat-option value="Z" *ngIf="field === 'Z' && faculty === 'C'" (click)="checkValidation()">Zarządzanie Łańcuchem Dostaw</mat-option>
+        <mat-option value="S" *ngIf="field === 'I' && faculty === 'D'" (click)="checkValidation()">Systemy Informacyjne</mat-option>
+        <mat-option value="G" *ngIf="field === 'I' && faculty === 'D'" (click)="checkValidation()">Grafika Komputerowa</mat-option>
+        <mat-option value="A" *ngIf="field === 'E' && faculty === 'D'" (click)="checkValidation()">Automatyka</mat-option>
+        <mat-option value="K" *ngIf="field === 'E' && faculty === 'D'" (click)="checkValidation()">Komputerowe Systemy Pomiarowe</mat-option>
+        <mat-option value="O" *ngIf="field === 'I' && faculty === 'E'" (click)="checkValidation()">Ogrzewnictwo i Wentylacja</mat-option>
+        <mat-option value="S" *ngIf="field === 'I' && faculty === 'E'" (click)="checkValidation()">Sieci i Instalacje Sanitarne</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <button mat-raised-button color="primary" (click)="closeDialog()">Anuluj tworzenie grupy</button>
+      </div>
+      <div class="col-lg-6">
+      <button mat-raised-button color="primary" (click)="createGroup()" [disabled]="!checkValidation()">Utwórz grupę</button>
+    </div>
+  </div>
+</div>

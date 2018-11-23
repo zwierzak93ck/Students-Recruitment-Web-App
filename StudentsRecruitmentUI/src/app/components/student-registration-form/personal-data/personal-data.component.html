@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+
+            <mat-form-field>
+                <input matInput placeholder="PESEL" type="number" pattern="\d{11}" maxlength="11" [(ngModel)]="pesel" (input)="isValidEvent($event)"
+                    [formControl]="peselControl" required>
+                <button mat-button *ngIf="pesel" matSuffix mat-icon-button aria-label="Clear" (click)="pesel=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Imię" type="text" pattern="{{namePattern}}" [(ngModel)]="firstName" (input)="isValidEvent($event)"
+                    [formControl]="firstNameControl" required>
+                    <button mat-button *ngIf="firstName" matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Imię ojca" type="text" pattern="{{namePattern}}" [(ngModel)]="fatherName" (input)="isValidEvent($event)"
+                    [formControl]="fatherNameControl" required>
+                    <button mat-button *ngIf="fatherName" matSuffix mat-icon-button aria-label="Clear" (click)="fatherName=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select placeholder="Obywatelstwo" [(ngModel)]="nationality" [formControl]="nationalityControl" required>
+                    <mat-option *ngFor="let nationality of nationalities" attr.id="nationality" [value]="nationality.value" (click)="isValidEvent($event)">{{nationality.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <mat-form-field>
+                <input matInput id="birthdateInput" [matDatepicker]="picker" placeholder="Data urodzenia" [(ngModel)]="birthdate" (ngModelChange)="isValidEvent($event)"
+                    [formControl]="birthdateControl" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi="true" #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Drugie imię" type="text" pattern="{{namePattern}}" [(ngModel)]="secondName" (input)="isValidEvent($event)"
+                    [formControl]="secondNameControl">
+                    <button mat-button *ngIf="secondName" matSuffix mat-icon-button aria-label="Clear" (click)="secondName=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Imię matki" type="text" pattern="{{namePattern}}" [(ngModel)]="motherName" (input)="isValidEvent($event)"
+                    [formControl]="motherNameControl" required>
+                    <button mat-button *ngIf="motherName" matSuffix mat-icon-button aria-label="Clear" (click)="motherName=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+            </mat-form-field>
+
+            <br>
+
+            <!-- <mat-radio-group aria-label="Dokument tożsamości" [(ngModel)]="identityDocument" (change)="isValidEvent($event)" [formControl]="identityDocumentControl"
+                required>
+                <mat-radio-button value="1">Dowód Osobisty</mat-radio-button>
+                <mat-radio-button value="2">Paszport</mat-radio-button>
+            </mat-radio-group> -->
+
+        </div>
+        <div class="col-lg-4">
+            <mat-radio-group [(ngModel)]="gender" (change)="isValidEvent($event)" [formControl]="genderControl" required>
+                <mat-radio-button *ngFor="let gender of genders" [value]="gender.value">{{gender.value}}</mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field>
+                <input matInput placeholder="Nazwisko" type="text" pattern="{{namePattern}}" [(ngModel)]="lastName" (input)="isValidEvent($event)"
+                    [formControl]="lastNameControl" required>
+                    <button mat-button *ngIf="lastName" matSuffix mat-icon-button aria-label="Clear" (click)="lastName=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Nazwisko rodowe" type="text" pattern="{{namePattern}}" [(ngModel)]="familyName" (input)="isValidEvent($event)"
+                    [formControl]="familyNameControl">
+                    <button mat-button *ngIf="familyName" matSuffix mat-icon-button aria-label="Clear" (click)="familyName=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+            </mat-form-field>
+
+            <!-- <mat-form-field>
+                <input matInput placeholder="Seria i numer" required>
+            </mat-form-field> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+  }
+
+  th {
+    font-weight: bolder;
+    font-size: medium;
+  }
+
+  th.mat-header-cell {
+    text-align: center;
+  }
+
+  span.table-title {
+    font-weight: bolder;
+    font-size: larger;
+  }
+
+  

@@ -1,0 +1,9 @@
+<img *ngIf="image != null && this._router.url === '/candidateHome'" #photo src="data:image/png;base64,{{image}}">
+<div *ngIf="this._router.url === '/candidateHome'">
+    <button mat-raised-button color="primary" (click)="checkCandidateData()">{{this._authService.isDataAdded ? 'EdytujDane' : 'DodajDane'}}</button>
+    <button mat-raised-button color="primary" (click)="fileInput.click()" [disabled]="!this._authService.isDataAdded">Wybierz zdjęcie</button>
+    <input type="file" #fileInput style="display: none" accept="image/x-png, image/jpeg" width="280" (change)="selectFile($event)">
+    <button mat-raised-button color="primary" routerLink="addfieldofstudy" [disabled]="!this.image">Wybierz kierunek studiów</button>
+</div>
+
+<router-outlet></router-outlet>

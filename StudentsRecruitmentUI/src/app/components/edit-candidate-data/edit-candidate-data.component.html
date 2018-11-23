@@ -1,0 +1,156 @@
+<mat-card>
+    <mat-card-content>
+<mat-accordion>
+  
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Dane Osobowe
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+    
+                <mat-form-field>
+                    <input matInput placeholder="PESEL" type="number" pattern="\d{11}" max="99999999999" [(ngModel)]="pesel" (input)="checkValidation()" [formControl]="peselControl" required>
+                    <!--<mat-hint align="end">{{pesel.length}} / 11</mat-hint>-->
+                    <button mat-button *ngIf="pesel" matSuffix mat-icon-button aria-label="Clear" (click)="pesel=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input matInput placeholder="Imię" type="text" pattern="{{namePattern}}" [(ngModel)]="firstName" (input)="checkValidation()" [formControl]="firstNameControl" required>
+                    <mat-error *ngIf="firstNameControl.hasError('required')">Pole wymagane</mat-error>
+                    <mat-error *ngIf="firstNameControl.hasError('pattern')">Popraw pole</mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input matInput placeholder="Imię ojca" type="text" pattern="{{namePattern}}" [(ngModel)]="fatherName" (input)="checkValidation()" [formControl]="fatherNameControl" required>
+                    <mat-error *ngIf="fatherNameControl.hasError('required')">Proszę uzupełnić pole</mat-error>
+                    <mat-error *ngIf="fatherNameControl.hasError('pattern')">Proszę poprawić pole</mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-select [value]="nationality" placeholder="Obywatelstwo" [(ngModel)]="nationality" [formControl]="nationalityControl" required>
+                        <mat-option value="option1" (click)="checkValidation()">Polska</mat-option>
+                        <mat-option value="option2" (click)="checkValidation()">Polska</mat-option>
+                        <mat-option value="option3" (click)="checkValidation()">polska</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="nationalityControl.hasError('required')">Pole wymagane</mat-error>
+                </mat-form-field>
+    
+            </div>
+    
+            <div class="col-lg-4">
+    
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Data urodzenia" [(ngModel)]="birthdate"  (ngModelChange)="checkValidation()" [formControl]="birthdateControl" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                    <!--<mat-error *ngIf="birthdayControl.hasError('required')">Pole wymagane</mat-error>-->
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input matInput placeholder="Drugie imię" type="text" pattern="{{namePattern}}" [(ngModel)]="secondName" (input)="checkValidation()" [formControl]="secondNameControl">
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input matInput placeholder="Imię matki" type="text" pattern="{{namePattern}}" [(ngModel)]="motherName" (input)="checkValidation()" [formControl]="motherNameControl" required>
+                    <!--<mat-error *ngIf="motherNameControl.hasError('required')">Pole wymagane</mat-error>
+                    <mat-error *ngIf="motherNameControl.hasError('pattern')">Proszę poprawić pole</mat-error>-->
+                </mat-form-field>
+    
+                <br>
+    
+                <mat-radio-group aria-label="Dokument tożsamości" [(ngModel)]="identityDocument" (change)="checkValidation()" [formControl]="identityDocumentControl" required>
+                    <mat-radio-button value="1">Dowód Osobisty</mat-radio-button>
+                    <mat-radio-button value="2">Paszport</mat-radio-button>
+                </mat-radio-group>
+    
+            </div>
+            <div class="col-lg-4">
+                <mat-radio-group [(ngModel)]="selectedGender" (change)="checkValidation()" [formControl]="genderControl">
+                    <mat-radio-button *ngFor="let gender of genders" [(value)]="gender.value" [checked]="gender.checked">{{gender.value}}</mat-radio-button>
+                </mat-radio-group>
+    
+                <mat-form-field>
+                    <input matInput placeholder="Nazwisko" type="text" pattern="{{namePattern}}" [(ngModel)]="lastName" (input)="checkValidation()" [formControl]="lastNameControl" required>
+                   
+                </mat-form-field>
+    
+    
+                <mat-form-field>
+                    <input matInput placeholder="Nazwisko rodowe" type="text" pattern="{{namePattern}}" [(ngModel)]="familyName" (input)="checkValidation()" [formControl]="familyNameControl">
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input matInput placeholder="Seria i numer" required > 
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Adres Zamieszkania
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <mat-form-field>
+                <mat-select placeholder="Kraj" [(ngModel)]="country" [formControl]="countryControl" name="country" required>
+                  <mat-option *ngFor="let nationality of nationalities" [value]="nationality.value" (click)="checkValidation()">{{nationality.value}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field>
+            <input matInput placeholder="Ulica" type="text" pattern="{{namePattern}}" [(ngModel)]="street" (input)="checkValidation()" [formControl]="streetControl" required>
+      </mat-form-field>
+
+            <mat-form-field>
+          <input matInput placeholder="Kod Pocztowy" type="number" [(ngModel)]="postalCode" (input)="checkValidation($event)" [formControl]="postalCodeControl" required>
+    </mat-form-field>
+          </div>
+
+          <div class="col-lg-4">
+                <mat-form-field>
+                        <mat-select placeholder="Województwo" [(ngModel)]="voivodeship" (input)="checkValidation($event)" [formControl]="voivodeshipControl" [disabled]="!(country === 'Polska')" required> 
+                            <mat-option *ngFor="let voivodeship of voivodeships" [value]="voivodeship.value" (click)="checkValidation($event)">{{voivodeship.value}}</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                          <input matInput placeholder="Nr domu" type="number" pattern="\d+"[(ngModel)]="houseNumber" (input)="checkValidation()" [formControl]="houseNumberControl" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-select placeholder="Typ Miejscowości" [(ngModel)]="typeOfTown" [formControl]="typeOfTownControl" required> 
+                              <mat-option *ngFor="let typeOfTown of typesOfTown" [value]="typeOfTown.value" (click)="checkValidation()">{{typeOfTown.value}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+                <mat-form-field>
+                        <input matInput placeholder="Miejscowość" type="text" pattern="{{namePattern}}" [(ngModel)]="city" (input)="checkValidation()" [formControl]="cityControl" required>
+                      </mat-form-field>
+                      <mat-form-field>
+                          <input matInput placeholder="Nr lokalu" type="number" pattern="\d+" [(ngModel)]="apartmentNumber" (input)="checkValidation()" [formControl]="apartmentNumberControl">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput placeholder="Poczta" type="text" pattern="{{namePattern}}" [(ngModel)]="postOffice" (input)="checkValidation()" [formControl]="postOfficeControl" required>
+                          </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+<button mat-raised-button color="primary" (click)="updateData()">Zaktualizuj dane</button>
+<a mat-raised-button color="primary" routerLink="/candidateHome">Anuluj aktualizowanie danych</a>
+</mat-card-content>
+</mat-card>

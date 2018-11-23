@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <mat-radio-group aria-labelledby="Forma studiów" [(ngModel)]="formOfStudy" (change)="isValidEvent($event)" aria-label="Forma studiów"
+        [formControl]="formOfStudyControl" required>
+        <mat-radio-button *ngFor="let formOfStudy of formsOfStudies" [value]="formOfStudy.value">{{formOfStudy.value}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="col-lg-4">
+      <mat-radio-group [(ngModel)]="degreeOfStudy" (change)="isValidEvent($event)" aria-label="Stopień studiów" [formControl]="degreeOfStudyControl"
+        required>
+        <mat-radio-button *ngFor="let degreeOfStudy of degreesOfStudies" [value]="degreeOfStudy.value">{{degreeOfStudy.value}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="col-lg-4">
+      <div *ngIf="degreeOfStudy === 'Drugiego stopnia'">
+        <mat-form-field>
+          <mat-select placeholder="Kierunek studiów" [(ngModel)]="specialization" [formControl]="fieldOfStudyControl" required>
+            <mat-optgroup *ngFor="let fieldOfStudy of fieldsOfStudies" [label]="fieldOfStudy.value">
+              <mat-option *ngFor="let specialization of fieldOfStudy.specializations" [value]="specialization.value" (click)="isValidEvent($event)">{{specialization.value}}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="degreeOfStudy === 'Pierwszego stopnia'">
+        <mat-form-field>
+          <mat-select placeholder="Kierunek studiów" [(ngModel)]="fieldOfStudy" [formControl]="fieldOfStudyControl" required>
+            <mat-option *ngFor="let fieldOfStudy of fieldsOfStudies; let i = index" [value]="fieldOfStudy.value" (click)="isValidEvent($event, i)">{{fieldOfStudy.value}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <app-high-school-information *ngIf="degreeOfStudy === 'Pierwszego stopnia'"></app-high-school-information>
+  <app-information-about-studies *ngIf="degreeOfStudy === 'Drugiego stopnia'"></app-information-about-studies>
+  <button mat-raised-button color="primary" routerLink="/candidateHome">Powrót</button>
+  <button mat-raised-button color="primary" (click)="addFieldOfStudy()" 
+  [disabled]="!this._candidateService.getIsFieldOfStudyValid()">Potwierdź wybór kierunku</button>

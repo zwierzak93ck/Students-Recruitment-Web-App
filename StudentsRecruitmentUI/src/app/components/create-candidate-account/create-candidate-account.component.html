@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-content>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 content">
+          <mat-form-field>
+            <input matInput placeholder="Adres email" type="text" [(ngModel)]="email" [formControl]="emailControl" (input)="checkValidation()"
+              email required>
+            <button mat-button *ngIf="email" matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="emailControl.hasError('email')">Zły format adresu e-mail</mat-error>
+            <mat-error *ngIf="emailControl.hasError('required')">Pole wymagane</mat-error>
+          </mat-form-field>
+          <mat-icon matTooltip="user@example.com">info</mat-icon>
+          <mat-form-field>
+            <input matInput placeholder="Potwierdź adres" type="text" [(ngModel)]="emailConfirm" [formControl]="emailConfirmControl" (input)="checkValidation()"
+              email required>
+              <button mat-button *ngIf="emailConfirm" matSuffix mat-icon-button aria-label="Clear" (click)="emailConfirm=''">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="emailControl.hasError('email')">Zły format adresu e-mail</mat-error>
+            <mat-error *ngIf="emailControl.hasError('required')">Pole wymagane</mat-error>
+            <mat-error *ngIf="checkEmails()">Powyższe pola nie są identyczne</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Hasło" type="password" [(ngModel)]="password" [formControl]="passwordControl" (input)="checkValidation()"
+              required>
+              <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="passwordControl.hasError('required')">Pole wymagane</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Potwierdź hasło" type="password" [(ngModel)]="passwordConfirm" [formControl]="passwordConfirmControl"
+              (input)="checkValidation()" required>
+              <button mat-button *ngIf="passwordConfirm" matSuffix mat-icon-button aria-label="Clear" (click)="passwordConfirm=''">
+                <mat-icon>close</mat-icon>
+            </button>
+            <mat-error *ngIf="passwordControl.hasError('required')">Pole wymagane</mat-error>
+            <mat-error *ngIf="!checkPasswords()">Powyższe pola nie są identyczne</mat-error>
+          </mat-form-field>
+          <button mat-raised-button (click)="register()" [disabled]="!checkValidation()" color="primary">Utwórz konto</button>
+          <a mat-button routerLink="/login">Zaloguj</a>
+          <div style="color: red">{{errorMessage}}</div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

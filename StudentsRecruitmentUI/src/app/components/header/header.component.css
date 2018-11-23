@@ -1,0 +1,14 @@
+#userName {
+    position: absolute;
+    right: 10px;
+}
+
+#status {
+    width: 300px;
+    display: inline-flex;
+    margin: 0 auto;
+}
+
+mat-toolbar {
+    margin-bottom: 20px;
+}

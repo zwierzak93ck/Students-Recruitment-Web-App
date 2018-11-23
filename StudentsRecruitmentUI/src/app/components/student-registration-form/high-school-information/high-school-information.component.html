@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <mat-form-field>
+        <input matInput placeholder="Siedziba szkoły (miejscowość)" [(ngModel)]="highSchoolHeadquarter" [formControl]="highSchoolHeadquarterControl" (input)="checkValidation()" required>
+        <button mat-button *ngIf="highSchoolHeadquarter" matSuffix mat-icon-button aria-label="Clear" (click)="highSchoolHeadquarter=''">
+          <mat-icon>close</mat-icon>
+          </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Siedziba Okręgowej Komisji Egzaminacyjnej" [(ngModel)]="commissionHeadquarter" [formControl]="commissionHeadquarterControl" required>
+          <mat-option *ngFor="let commission of commissionsHeadquarters" [value]="commission.value" (click)="checkValidation()" >{{commission.value}}</mat-option>
+  </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field>
+          <mat-select placeholder="Ocena z języka obcego" [(ngModel)]="foreignLanguageGrade" [formControl]="foreignLanguageGradeControl" required>
+                  <mat-option *ngFor="let grade of grades" [value]="grade" (click)="checkValidation()" >{{grade}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field>
+        <input matInput placeholder="Pełna nazwa szkoły" [(ngModel)]="highSchoolName" [formControl]="highSchoolNameControl" (input)="checkValidation()" required>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Numer świadectwa maturalnego" [(ngModel)]="maturityCertificateNumber" [formControl]="maturityCertificateNumberControl" (input)="checkValidation()" required>
+        </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="Ocena z matematyki" [(ngModel)]="mathGrade" [formControl]="mathGradeControl" required>
+                  <mat-option *ngFor="let grade of grades" [value]="grade" (click)="checkValidation()" >{{grade}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      
+    </div>
+    <div class="col-lg-4">
+        <mat-form-field>
+            <mat-select placeholder="Rok ukończenia szkoły" [(ngModel)]="highSchoolGraduationYear" [formControl]="highSchoolGraduationYearControl" required>
+                    <mat-option *ngFor="let year of years" [value]="year" (click)="checkValidation()" (click)="checkValidation()" >{{year}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Ocena z języka polskiego" [(ngModel)]="polishLanguageGrade" [formControl]="polishLanguageGradeControl" required>
+                    <mat-option *ngFor="let grade of grades" [value]="grade" (click)="checkValidation()" >{{grade}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+      <mat-form-field>
+          <mat-select placeholder="Przedmiot wybrany" [(ngModel)]="selectedSubject" [formControl]="selectedSubjectControl" [disabled]="!this._candidateService.getSubjectsForSelectedFieldOfStudy()" required>
+                  <mat-option *ngFor="let subject of this._candidateService.getSubjectsForSelectedFieldOfStudy()" [value]="subject.value" (click)="checkValidation()"  style="margin-right: 10px">{{subject.value}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-6">
+      <mat-form-field style="width: 50px">
+        <mat-select placeholder="Ocena" [(ngModel)]="selectedSubjectGrade" [formControl]="selectedSubjectGradeControl"  required>
+                <mat-option *ngFor="let grade of grades" [value]="grade" (click)="checkValidation()">{{grade}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+  </div>
+  </div>
+    </div>
+  </div>
+</div>

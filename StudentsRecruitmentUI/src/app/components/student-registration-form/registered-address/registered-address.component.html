@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <mat-form-field>
+        <mat-select placeholder="Kraj" [(ngModel)]="country" [formControl]="countryControl" name="country" required>
+          <mat-option *ngFor="let nationality of nationalities" [value]="nationality.value" (click)="checkValidation()">{{nationality.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Ulica" type="text" [(ngModel)]="street" (input)="checkValidation()" [formControl]="streetControl" required>
+            <button mat-button *ngIf="street" matSuffix mat-icon-button aria-label="Clear" (click)="street=''">
+              <mat-icon>close</mat-icon>
+              </button>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Kod Pocztowy" type="text" [(ngModel)]="postalCode" (input)="checkValidation()" [formControl]="postalCodeControl" required>
+          <button mat-button *ngIf="postalCode" matSuffix mat-icon-button aria-label="Clear" (click)="postalCode=''">
+            <mat-icon>close</mat-icon>
+            </button>
+    </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field>
+        <mat-select placeholder="Województwo" [(ngModel)]="voivodeship" (input)="checkValidation()" [formControl]="voivodeshipControl" [disabled]="!(country === 'Polska')" required> 
+            <mat-option *ngFor="let voivodeship of voivodeships" [value]="voivodeship.value" (click)="checkValidation()">{{voivodeship.value}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Nr domu" type="number" pattern="\d+"[(ngModel)]="houseNumber" (input)="checkValidation()" [formControl]="houseNumberControl" required>
+          <button mat-button *ngIf="houseNumber" matSuffix mat-icon-button aria-label="Clear" (click)="houseNumber=''">
+            <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Typ Miejscowości" [(ngModel)]="typeOfTown" [formControl]="typeOfTownControl" required> 
+              <mat-option *ngFor="let typeOfTown of typesOfTown" [value]="typeOfTown.value" (click)="checkValidation()">{{typeOfTown.value}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field>
+        <input matInput placeholder="Miejscowość" type="text" [(ngModel)]="city" (input)="checkValidation()" [formControl]="cityControl" required>
+        <button mat-button *ngIf="city" matSuffix mat-icon-button aria-label="Clear" (click)="city=''">
+          <mat-icon>close</mat-icon>
+          </button>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Nr lokalu" type="number" pattern="\d+" [(ngModel)]="apartmentNumber" (input)="checkValidation()" [formControl]="apartmentNumberControl">
+          <button mat-button *ngIf="apartmentNumber" matSuffix mat-icon-button aria-label="Clear" (click)="apartmentNumber=''">
+            <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Poczta" type="text" [(ngModel)]="postOffice" (input)="checkValidation()" [formControl]="postOfficeControl" required>
+            <button mat-button *ngIf="postOffice" matSuffix mat-icon-button aria-label="Clear" (click)="postOffice=''">
+              <mat-icon>close</mat-icon>
+              </button>
+          </mat-form-field>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 content">
+        <mat-form-field>
+          <input matInput placeholder="Adres email" type="text" [(ngModel)]="login">
+          <button mat-button *ngIf="login" matSuffix mat-icon-button aria-label="Clear" (click)="login=''">
+            <mat-icon>close</mat-icon>
+        </button>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <input matInput placeholder="Hasło" type="password" [(ngModel)]="password">
+          <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
+            <mat-icon>close</mat-icon>
+        </button>
+        </mat-form-field>
+     
+        <button mat-raised-button (click)="authenticateUser()" color="primary">Zaloguj</button>
+      
+      <a mat-button color="primary" routerLink="/register">Utwórz konto</a>
+      <div style="color: red">{{errorMessage}}</div>
+      </div>
+    </div>
+    </div>
+  </mat-card-content>
+</mat-card>

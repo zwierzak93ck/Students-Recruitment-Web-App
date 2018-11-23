@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <span>Internetowy System Rekrutacji Na Studia {{this._router.url === '/recruiterHome' ? ' - Panel Rekrutera' : ''}}</span>
+      <div id="status">
+        
+      <span *ngIf="this._router.url === '/candidateHome' && this._authService.status">STATUS: {{this._authService.status}} </span>
+      <span *ngIf="this._router.url === '/candidateHome' && this._authService.groupName" style="margin-left: 20px">Grupa: {{this._authService.groupName}}</span>
+      </div>
+      <button mat-button [matMenuTriggerFor]="menu" id="userName" *ngIf="this._router.url !== '/login' && this._router.url !== '/register'">{{this._authService.userName}}</button>
+      <mat-menu #menu="matMenu" class="userName">
+          <button mat-menu-item (click)="logOut()">Wyloguj</button>
+      </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

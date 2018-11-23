@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <mat-form-field>
+        <input matInput placeholder="Pełna nazwa uczelni" [(ngModel)]="universityFullname" [formControl]="universityFullnameControl"
+          (input)="checkValidation()" required>
+          <button mat-button *ngIf="universityFullName" matSuffix mat-icon-button aria-label="Clear" (click)="universityFullName=''">
+            <mat-icon>close</mat-icon>
+            </button>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Numer dyplomu ukończenia studiów" [(ngModel)]="diplomaNumber" [formControl]="diplomaNumberControl"
+          (input)="checkValidation()" required>
+          <button mat-button *ngIf="diplomaNumber" matSuffix mat-icon-button aria-label="Clear" (click)="diplomaNUmber=''">
+            <mat-icon>close</mat-icon>
+            </button>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="Ocena z języka obcego" [(ngModel)]="foreignLanguageGrade" [formControl]="foreignLanguageGradeControl" required>
+                  <mat-option *ngFor="let grade of grades" [value]="grade" (click)="checkValidation()" >{{grade}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field>
+        <input matInput placeholder="Siedziba uczelni" [(ngModel)]="universityHeadquarters" [formControl]="universityHeadquartersControl"
+          (input)="checkValidation()" required>
+          <button mat-button *ngIf="universityHeadquarters" matSuffix mat-icon-button aria-label="Clear" (click)="universityHeadquarters=''">
+            <mat-icon>close</mat-icon>
+            </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Zdobyty tutuł" [(ngModel)]="obtainedTitle" [formControl]="obtainedTitleControl" required>
+          <mat-option *ngFor="let title of titles" [value]="title.value" (click)="checkValidation()" (click)="checkValidation()">{{title.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="Ocena na dyplomie" [(ngModel)]="diplomaGrade" [formControl]="diplomaGradeControl" required>
+                  <mat-option *ngFor="let grade of grades" [value]="grade" (click)="checkValidation()" >{{grade}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-4">
+      <mat-form-field>
+        <mat-select placeholder="Rok ukończenia studiów" [(ngModel)]="studyGraduationYear" [formControl]="studyGraduationYearControl"
+          required>
+          <mat-option *ngFor="let year of years" [value]="year" (click)="checkValidation()">{{year}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Ukończony kierunek studiów" [(ngModel)]="fieldOfStudy" [formControl]="fieldOfStudyControl" required>
+          <mat-option *ngFor="let fieldOfStudy of fieldsOfStudies; let i = index" [value]="fieldOfStudy.value" (click)="checkValidation($event, i)">{{fieldOfStudy.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="fieldOfStudy">
+        <mat-select placeholder="Specjalizacja" [(ngModel)]="specialization" [formControl]="specializationControl" required>
+          <mat-option *ngFor="let specialization of this._candidateService.specializations" [value]="specialization.value" (click)="checkValidation()">{{specialization.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

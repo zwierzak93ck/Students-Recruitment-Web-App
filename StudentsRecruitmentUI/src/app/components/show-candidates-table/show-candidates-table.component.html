@@ -1,0 +1,75 @@
+<span class="table-title">{{this.tableType === 0 ? 'Lista przyjętych kandydatów' : this.tableType === 1 ? 
+                          'Lista odrzuconych kandydatów' : 'Lista kandydatów w trakcie rekrutacji'}}</span>
+<table mat-table matSort [dataSource]="dataSource">
+  <ng-container matColumnDef="firstName" >
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Imię </th>
+    <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nazwisko</th>
+    <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="selectedFormOfStudy">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Forma Studiów</th>
+    <td mat-cell *matCellDef="let element">{{element.selectedFormOfStudy}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="selectedDegreeOfStudy">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Stopień Studiów</th>
+    <td mat-cell *matCellDef="let element">{{element.selectedDegreeOfStudy}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="selectedFieldOfStudy">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Kierunek Studiów</th>
+    <td mat-cell *matCellDef="let element">{{element.selectedFieldOfStudy}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="selectedSpecialization">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Specjalizacja</th>
+      <td mat-cell *matCellDef="let element">{{element.selectedSpecialization}}</td>
+    </ng-container>
+
+  <ng-container matColumnDef="score">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ilość punktów</th>
+    <td mat-cell *matCellDef="let element">{{element.scoreFirst.length > 0 ? element.scoreFirst[0].score : element.scoreSecond.length > 0 ? element.scoreSecond[0].score : 'Błąd przy obliczaniu ilości punktów'}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="isRecruitmentPaid" *ngIf="tableType === 2">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Płatnośc</th>
+      <td mat-cell *matCellDef="let element">{{element.isRecruitmentPaid === false ? 'Nieopłacona' : 'Opłacona'}}<button mat-raised-button color="primary" *ngIf="element.isRecruitmentPaid === false" (click)="confirmPayment(element)">Potwierdź płatność</button> </td>
+    </ng-container>
+
+  <ng-container matColumnDef="updateStatus" *ngIf="tableType !== 0">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Zmiana statusu</th>
+    <td mat-cell *matCellDef="let element">
+      <button *ngIf="tableType === 2" mat-raised-button color="primary" [disabled]="!element.isRecruitmentPaid" (click)="changeStatus(element, $event)">{{element.buttonTitle}}</button>
+      <button *ngIf="tableType === 1" mat-raised-button color="primary" [disabled]="!element.isRecruitmentPaid" (click)="changeStatus(element, $event)">Przyjmij</button>
+    
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="addToGroup" *ngIf="tableType === 0">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Grupa</th>
+      <td mat-cell *matCellDef="let element"> <div *ngIf="element.groupName.length > 0">{{element.groupName}}
+      </div> 
+      <div  *ngIf="element.groups.length > 0">
+        <mat-form-field>
+        <mat-select [(ngModel)]="selectedGroup" placeholder="Grupa">
+          <mat-option *ngFor="let el of element.groups" [value]="el.groupName">{{el.groupName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addToGroup(element)">Przypisz</button>
+        
+      </div>
+      <div *ngIf="!element.groupName.length && !element.groups.length">
+       <button mat-raised-button color="primary" (click)="openDialog()">Utwórz grupę</button>
+      </div>
+      </td>
+    </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

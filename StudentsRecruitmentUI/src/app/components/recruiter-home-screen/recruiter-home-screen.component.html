@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row select">
+        <div class="col-lg-12 select">
+                <mat-select placeholder="Tabela do wyświetlenia">
+                        <mat-option (click)="showCandidatesTable(0)">Kandydaci zaakceptowani</mat-option>
+                        <mat-option (click)="showCandidatesTable(1)">Kandydaci odrzuceni</mat-option>
+                        <mat-option (click)="showCandidatesTable(2)">Kandydaci w trakcie rekrutacji</mat-option>
+                        <mat-option (click)="showGroupsTable()">Grupy studenckie</mat-option> 
+                    </mat-select>
+        </div>
+    </div>
+    <div class="row" *ngIf="isShowCandidatesTable === true">
+        
+        <div class="col-lg-12">
+                <app-show-candidates-table></app-show-candidates-table>
+            </div>
+    </div>
+    <div class="row" *ngIf="isShowGroupsTable === true">
+        <div class="col-lg-12">
+                <app-show-group-table></app-show-group-table>
+            </div>
+    </div>
+</div>
+
